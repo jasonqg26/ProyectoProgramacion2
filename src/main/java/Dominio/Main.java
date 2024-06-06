@@ -2,6 +2,7 @@ package Dominio;
 
 import java.util.concurrent.Semaphore;
 
+// Autores: Alexis Fabián Quesada Cordero C36202 y Jason Quesada Gómez C36213
 public class Main {
     public static void main(String[] args)  {
 
