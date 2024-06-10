@@ -23,6 +23,8 @@ public class Main {
         hilo_EN.start();
         hilo_NO.start();
 
+//        Ruta ej = new Ruta();
+//        ej.insertar(new Ruta.Punto(0,4));
 
 
     }
