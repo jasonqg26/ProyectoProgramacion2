@@ -1,13 +1,24 @@
 package Dominio;
+
 public class Ruta {
 
     public static class Punto {
         private int x;
         private int y;
 
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
         public Punto(int x, int y) {
             this.x = x;
             this.y = y;
+
+
         }
     }
     private static class NodoPunto {
@@ -43,6 +54,11 @@ public class Ruta {
     public Ruta (){
         this.cabeza = null;
     }
+
+    public NodoPunto getCabeza() {
+        return cabeza;
+    }
+
 
     public void insertar(Punto punto) {
         NodoPunto nuevoPunto = new NodoPunto(punto);
