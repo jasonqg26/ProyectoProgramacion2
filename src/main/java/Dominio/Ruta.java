@@ -1,7 +1,4 @@
 package Dominio;
-
-import javafx.geometry.Point2D;
-
 public class Ruta {
 
     public static class Punto {
