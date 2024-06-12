@@ -21,7 +21,7 @@ public class Ruta {
 
         }
     }
-    private static class NodoPunto {
+    public static class NodoPunto {
 
         private Punto punto;
         private NodoPunto siguiente;
