@@ -68,14 +68,14 @@ public class Proc_NO implements Runnable {
             sem_Control.release();
             sem_NO.release();
 //-----------------------------------------Movimiento de carro por  la interseccion--------------------------------------//
-            while (actual.getCordenada().getX() != -100 && actual.getCordenada().getY() != 101) {
+            while (actual != null) {
                 int posicionActual = rutaNO.obtenerPosicion(actual.getCordenada());
 
                 semaforosPuntosRuta[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
                 Thread.sleep(500); // Simular el tiempo de movimiento entre puntos
-                if (actual.getCordenada().getX() == -300 && actual.getCordenada().getY() == 601) {
+                if (actual.getCordenada().getX() == 2 && actual.getCordenada().getY() == 500) {
                     carroNOimagen.setRotate(90);
                 }
 

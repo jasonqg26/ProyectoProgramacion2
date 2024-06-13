@@ -63,7 +63,7 @@ public class Proc_EO implements Runnable {
             sem_EO.release();
 
 //-----------------------------------------Movimiento de carro por  la interseccion--------------------------------------//
-            while (actual.getCordenada().getX() != -1200 && actual.getCordenada().getY() != -101) {
+            while (actual != null) {
                 semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
