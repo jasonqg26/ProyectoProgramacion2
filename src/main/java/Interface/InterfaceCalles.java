@@ -21,6 +21,10 @@ public class InterfaceCalles {
     int carrosEO = 0;
     int carrosNO = 0;
 
+    Ruta rutaCarroEO;
+    Ruta rutaCarroEN;
+    Ruta rutaCarroNO;
+
     public Scene getScene() {
 
         Pane P_Principal = new Pane(); // se instancia el contendor//
@@ -50,7 +54,29 @@ public class InterfaceCalles {
 
 //--------------------------------------------Carro EO-------------------------------------------------------------------------//
 
-        // por cada clic se crea un carrp nuevo
+        //se crea ruta EO
+        Ruta rutaCarroEO = new Ruta();
+        rutaCarroEO.insertar(new Ruta.Punto(0, 0));
+        rutaCarroEO.insertar(new Ruta.Punto(-100, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-200, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-300, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-400, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-500, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-600, 1));
+        rutaCarroEO.insertar(new Ruta.Punto(-700, 2));//llega a interseccion
+        rutaCarroEO.insertar(new Ruta.Punto(-800, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-900, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-1000, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-1100, 2));
+        rutaCarroEO.insertar(new Ruta.Punto(-1200, -101));// final interseccion
+        rutaCarroEO.insertar(new Ruta.Punto(-1300, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1400, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1500, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1600, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1700, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1800, -100));
+        rutaCarroEO.insertar(new Ruta.Punto(-1900, -101));
+
         btnCarroEO.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -62,35 +88,29 @@ public class InterfaceCalles {
                 // se añade la imagen al pane
                 P_Principal.getChildren().add(EOImageView);
 
-                //se asigna la ruta al carro
-                Ruta rutaCarroEO = new Ruta();
-                rutaCarroEO.insertar(new Ruta.Punto(0, 0));
-                rutaCarroEO.insertar(new Ruta.Punto(-100, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-200, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-300, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-400, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-500, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-600, 1));
-                rutaCarroEO.insertar(new Ruta.Punto(-700, 2));//llega a interseccion
-                rutaCarroEO.insertar(new Ruta.Punto(-800, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-900, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-1000, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-1100, 2));
-                rutaCarroEO.insertar(new Ruta.Punto(-1200, -101));// final interseccion
-                rutaCarroEO.insertar(new Ruta.Punto(-1300, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1400, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1500, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1600, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1700, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1800, -100));
-                rutaCarroEO.insertar(new Ruta.Punto(-1900, -101));
-
                 // se ejecuta el proceso
                 new Thread(new Proc_EO(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, EOImageView, rutaCarroEO)).start();
             }
         });
 //--------------------------------------------Carro EN-------------------------------------------------------------------------//
 
+        Ruta rutaCarroEN = new Ruta();
+        rutaCarroEN.insertar(new Ruta.Punto(0, 0));
+        rutaCarroEN.insertar(new Ruta.Punto(-100, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-200, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-300, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-400, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-500, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-600, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-700, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, 2));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -100));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -200));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -300));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -400));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -500));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -600));
+        rutaCarroEN.insertar(new Ruta.Punto(-800, -700));
 
         btnCarroEN.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -103,31 +123,27 @@ public class InterfaceCalles {
 
                 P_Principal.getChildren().add(ENImageView);
 
-
-                Ruta rutaCarroEN = new Ruta();
-                rutaCarroEN.insertar(new Ruta.Punto(0, 0));
-                rutaCarroEN.insertar(new Ruta.Punto(-100, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-200, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-300, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-400, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-500, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-600, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-700, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, 2));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -100));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -200));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -300));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -400));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -500));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -600));
-                rutaCarroEN.insertar(new Ruta.Punto(-800, -700));
-
                 new Thread(new Proc_EN(ENImageView, rutaCarroEN)).start();
-
-
             }
         });
 //--------------------------------------------Carro NO-------------------------------------------------------------------------//
+
+        Ruta rutaCarroNO = new Ruta();
+        rutaCarroNO.insertar(new Ruta.Punto(0, 0));
+        rutaCarroNO.insertar(new Ruta.Punto(2, 100));
+        rutaCarroNO.insertar(new Ruta.Punto(2, 200));
+        rutaCarroNO.insertar(new Ruta.Punto(2, 300));
+        rutaCarroNO.insertar(new Ruta.Punto(3, 350));//llegada a la interseccion
+        rutaCarroNO.insertar(new Ruta.Punto(2, 400));
+        rutaCarroNO.insertar(new Ruta.Punto(2, 500));
+        rutaCarroNO.insertar(new Ruta.Punto(-100, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-200, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-300, 601));
+        rutaCarroNO.insertar(new Ruta.Punto(-400, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-500, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-600, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-700, 600));
+        rutaCarroNO.insertar(new Ruta.Punto(-800, 600));
 
         btnCarroNO.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -140,27 +156,7 @@ public class InterfaceCalles {
 
                 P_Principal.getChildren().add(NOImageView);
 
-
-                Ruta rutaCarroNO = new Ruta();
-                rutaCarroNO.insertar(new Ruta.Punto(0, 0));
-                rutaCarroNO.insertar(new Ruta.Punto(2, 100));
-                rutaCarroNO.insertar(new Ruta.Punto(2, 200));
-                rutaCarroNO.insertar(new Ruta.Punto(2, 300));
-                rutaCarroNO.insertar(new Ruta.Punto(3, 350));//llegada a la interseccion
-                rutaCarroNO.insertar(new Ruta.Punto(2, 400));
-                rutaCarroNO.insertar(new Ruta.Punto(2, 500));
-                rutaCarroNO.insertar(new Ruta.Punto(-100, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-200, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-300, 601));
-                rutaCarroNO.insertar(new Ruta.Punto(-400, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-500, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-600, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-700, 600));
-                rutaCarroNO.insertar(new Ruta.Punto(-800, 600));
-
                 new Thread(new Proc_NO(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, NOImageView, rutaCarroNO)).start();
-
-
             }
         });
 //--------------------------------------------AÑADIR A CONTENEDORES-------------------------------------------------------------------------//
