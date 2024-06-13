@@ -107,7 +107,7 @@ public class InterfaceCalles {
 
                 P_Principal.getChildren().add(ENImageView);
 
-                ENImageView.setVisible(true);
+
                 Ruta rutaCarroEN = new Ruta();
                 rutaCarroEN.insertar(new Ruta.Punto(0, 0));
                 rutaCarroEN.insertar(new Ruta.Punto(-100, 2));
@@ -126,7 +126,7 @@ public class InterfaceCalles {
                 rutaCarroEN.insertar(new Ruta.Punto(-800, -600));
                 rutaCarroEN.insertar(new Ruta.Punto(-800, -700));
 
-                new Thread(new Proc_EN(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, ENImageView, rutaCarroEN)).start();
+                new Thread(new Proc_EN(ENImageView, rutaCarroEN)).start();
 
 
             }
@@ -144,7 +144,6 @@ public class InterfaceCalles {
 
                 P_Principal.getChildren().add(NOImageView);
 
-                NOImageView.setVisible(true);
 
                 Ruta rutaCarroNO = new Ruta();
                 rutaCarroNO.insertar(new Ruta.Punto(0, 0));
@@ -162,9 +161,6 @@ public class InterfaceCalles {
                 rutaCarroNO.insertar(new Ruta.Punto(-600, 600));
                 rutaCarroNO.insertar(new Ruta.Punto(-700, 600));
                 rutaCarroNO.insertar(new Ruta.Punto(-800, 600));
-
-
-
 
                 new Thread(new Proc_NO(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, NOImageView, rutaCarroNO)).start();
 

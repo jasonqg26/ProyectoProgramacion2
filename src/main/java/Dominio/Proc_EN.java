@@ -6,20 +6,11 @@ import javafx.scene.image.ImageView;
 import java.util.concurrent.Semaphore;
 
 public class Proc_EN implements Runnable{
-    private Semaphore sem_EO ;
-    private Semaphore sem_NO ;
-    private Semaphore sem_Interseccion;
-    int carrosEO;
-    int carrosNO;
+
     private ImageView carroENimagen;
     private Ruta rutaEN;
 
-    public Proc_EN(Semaphore sem_EO, Semaphore sem_NO, Semaphore sem_Interseccion, int carrosEO, int carrosNO, ImageView carroENimagen, Ruta rutaEN) {
-        this.sem_EO = sem_EO;
-        this.sem_NO = sem_NO;
-        this.sem_Interseccion = sem_Interseccion;
-        this.carrosEO = carrosEO;
-        this.carrosNO = carrosNO;
+    public Proc_EN(ImageView carroENimagen, Ruta rutaEN) {
         this.carroENimagen = carroENimagen;
         this.rutaEN = rutaEN;
     }
@@ -27,7 +18,7 @@ public class Proc_EN implements Runnable{
     public void run() {
 
             try {
-
+//------------------------Movimiento de carro desde  inicio de la ruta hasta llegar al final de la ruta-------------------//
                 Ruta.NodoPunto actual = rutaEN.getCabeza(); // Obtener el primer punto de la ruta
                 carroENimagen.setRotate(0);
                 //mover el carro hasta llegar a la interseccion
@@ -40,7 +31,7 @@ public class Proc_EN implements Runnable{
                     }
                     actual = actual.getSiguiente(); // Mover al siguiente punto en la ruta
                 }
-
+//-----------------------------------------------------------------------------------------------------------------------//
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
