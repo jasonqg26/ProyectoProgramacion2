@@ -7,6 +7,7 @@ public class Proc_EO implements Runnable {
     private Semaphore sem_NO;
     private Semaphore sem_Interseccion;
     private Semaphore sem_Control; //Controla acceso a cantidad de carros en espera
+    private Semaphore[] semaforosPuntosRutaEO;
 
     private int carrosEO;
     private int carrosNO;
@@ -24,6 +25,10 @@ public class Proc_EO implements Runnable {
         this.carroEOimagen = carroEOimagen;
         this.rutaEO = rutaEO;
         sem_Control = new Semaphore(1); // Inicializamos el semáforo de control
+        semaforosPuntosRutaEO = new Semaphore[rutaEO.size()];
+        for (int i = 0; i < rutaEO.size(); i++) {
+            semaforosPuntosRutaEO[i] = new Semaphore(1); // Inicializar cada semáforo en 1
+        }
     }
 
     @Override
@@ -34,10 +39,19 @@ public class Proc_EO implements Runnable {
 
  //------------------------Movimiento de carro desde el inicio de la ruta hasta llegar a la interseccion-------------------//
             while (actual.getCordenada().getX() != -600 && actual.getCordenada().getY() != 1) {
+                int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
+                sem_EO.acquire();
+                semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
                 Thread.sleep(500); // Simular el tiempo de movimiento entre puntos
+                if (posicionActual > 0) {
+                    semaforosPuntosRutaEO[posicionActual-1].release();
+                }else {
+                    semaforosPuntosRutaEO[posicionActual].release();// Liberar el semáforo del punto actual
+                }
                 actual = actual.getSiguiente(); // Mover al siguiente punto en la ruta
+                sem_EO.release();
             }
 //------------------------------------------------------------------------------------------------------------------------//
             sem_EO.acquire();
@@ -51,9 +65,14 @@ public class Proc_EO implements Runnable {
 
 //-----------------------------------------Movimiento de carro por  la interseccion--------------------------------------//
             while (actual.getCordenada().getX() != -1200 && actual.getCordenada().getY() != -101) {
+                int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
+
+                semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
                 Thread.sleep(500); // Simular el tiempo de movimiento entre puntos
+                semaforosPuntosRutaEO[posicionActual].release();
+
                 actual = actual.getSiguiente(); // Mover al siguiente punto en la ruta
             }
 //------------------------------------------------------------------------------------------------------------------------//
