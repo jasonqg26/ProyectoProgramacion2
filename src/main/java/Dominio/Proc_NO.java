@@ -39,11 +39,11 @@ public class Proc_NO implements Runnable {
         try {
             carrosNO++;
             Ruta.NodoPunto actual = rutaNO.getCabeza(); // Obtener el primer punto de la ruta
+            int posicionActual = rutaNO.obtenerPosicion(actual.getCordenada());
             carroNOimagen.setRotate(0);// se resetea la orientación de la imagen
 
 //------------------------Movimiento de carro desde el inicio de la ruta hasta llegar a la interseccion-------------------//
             while (actual.getCordenada().getX() != 3 && actual.getCordenada().getY() != 350) {
-                int posicionActual = rutaNO.obtenerPosicion(actual.getCordenada());
                 sem_NO.acquire();
                 semaforosPuntosRuta[posicionActual].acquire(); // Adquirir el semáforo del punto actual
                 Ruta.NodoPunto finalActual = actual;
@@ -69,8 +69,6 @@ public class Proc_NO implements Runnable {
             sem_NO.release();
 //-----------------------------------------Movimiento de carro por  la interseccion--------------------------------------//
             while (actual != null) {
-                int posicionActual = rutaNO.obtenerPosicion(actual.getCordenada());
-
                 semaforosPuntosRuta[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
@@ -95,8 +93,6 @@ public class Proc_NO implements Runnable {
             sem_NO.release();
 //----------------------------Movimiento de carro desde salida de la interseccion hasta fin de ruta----------------------//
             while (actual != null) {
-                int posicionActual = rutaNO.obtenerPosicion(actual.getCordenada());
-
                 semaforosPuntosRuta[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 carroNOimagen.setRotate(90);
@@ -105,7 +101,6 @@ public class Proc_NO implements Runnable {
 
                 semaforosPuntosRuta[posicionActual].release();
                 actual = actual.getSiguiente(); // Mover al siguiente punto en la ruta
-
             }
 //------------------------------------------------------------------------------------------------------------------------//
         } catch (InterruptedException e) {
