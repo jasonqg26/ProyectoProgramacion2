@@ -1,10 +1,7 @@
 package Dominio;
-
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
-
 import java.util.concurrent.Semaphore;
-
 public class Proc_EO implements Runnable {
     private Semaphore sem_EO;
     private Semaphore sem_NO;

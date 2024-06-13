@@ -2,6 +2,40 @@ package Dominio;
 
 public class Ruta {
 
+//lista enlazada
+    private NodoPunto cabeza;
+    public Ruta (){
+        this.cabeza = null;
+    }
+
+    public NodoPunto getCabeza() {
+        return cabeza;
+    }
+
+    public int size() {
+        int size = 0;
+        NodoPunto actual = cabeza;
+        while (actual != null) {
+            size++;
+            actual = actual.getSiguiente();
+        }
+        return size;
+    }
+
+    public void insertar(Punto punto) {
+        NodoPunto nuevoPunto = new NodoPunto(punto);
+        if (cabeza == null) {
+            cabeza = nuevoPunto;
+        } else {
+            NodoPunto actual = cabeza;
+            while (actual.getSiguiente() != null) {
+                actual = actual.getSiguiente();
+            }
+            actual.setSiguiente(nuevoPunto);
+        }
+    }
+
+    //clase punto
     public static class Punto {
         private int x;
         private int y;
@@ -21,6 +55,7 @@ public class Ruta {
 
         }
     }
+    //Nodo
     public static class NodoPunto {
 
         private Punto punto;
@@ -36,10 +71,6 @@ public class Ruta {
             return punto;
         }
 
-        public void setCordenada(Punto cordenada) {
-            this.punto = cordenada;
-        }
-
         public NodoPunto getSiguiente() {
             return siguiente;
         }
@@ -47,29 +78,20 @@ public class Ruta {
         public void setSiguiente(NodoPunto siguiente) {
             this.siguiente = siguiente;
         }
-    }
-
-
-    private NodoPunto cabeza;
-    public Ruta (){
-        this.cabeza = null;
-    }
-
-    public NodoPunto getCabeza() {
-        return cabeza;
-    }
-
-
-    public void insertar(Punto punto) {
-        NodoPunto nuevoPunto = new NodoPunto(punto);
-        if (cabeza == null) {
-            cabeza = nuevoPunto;
-        } else {
-            NodoPunto actual = cabeza;
-            while (actual.getSiguiente() != null) {
+        public int obtenerIndice(Punto punto) {
+            NodoPunto actual = this;
+            int indice = 0;
+            while (actual != null) {
+                if (actual.getCordenada().getX() == punto.getX() && actual.getCordenada().getY() == punto.getY()) {
+                    return indice;
+                }
                 actual = actual.getSiguiente();
+                indice++;
             }
-            actual.setSiguiente(nuevoPunto);
+            // Si no se encuentra el punto, devuelve -1
+            return -1;
         }
     }
+
+
 }

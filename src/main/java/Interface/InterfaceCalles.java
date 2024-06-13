@@ -1,6 +1,4 @@
 package Interface;
-
-
 import Dominio.Proc_EN;
 import Dominio.Proc_EO;
 import Dominio.Proc_NO;
@@ -15,10 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.util.concurrent.Semaphore;
-
-
 public class InterfaceCalles {
-
+    //datos compartidos
     Semaphore sem_EO = new Semaphore(1);
     Semaphore sem_NO = new Semaphore(1);
     Semaphore sem_Interseccion = new Semaphore(1);
