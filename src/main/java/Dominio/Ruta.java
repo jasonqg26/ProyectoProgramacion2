@@ -35,6 +35,22 @@ public class Ruta {
         }
     }
 
+    public int obtenerPosicion(Punto punto) {
+        NodoPunto actual = cabeza;
+        int posicion = 0;
+
+        while (actual != null) {
+            if (actual.getCordenada().getX() == punto.getX() && actual.getCordenada().getY() == punto.getY()) {
+                return posicion;
+            }
+            actual = actual.getSiguiente();
+            posicion++;
+        }
+
+        // si no esta el punto
+        return -1;
+    }
+
     //clase punto
     public static class Punto {
         private int x;
@@ -77,19 +93,6 @@ public class Ruta {
 
         public void setSiguiente(NodoPunto siguiente) {
             this.siguiente = siguiente;
-        }
-        public int obtenerIndice(Punto punto) {
-            NodoPunto actual = this;
-            int indice = 0;
-            while (actual != null) {
-                if (actual.getCordenada().getX() == punto.getX() && actual.getCordenada().getY() == punto.getY()) {
-                    return indice;
-                }
-                actual = actual.getSiguiente();
-                indice++;
-            }
-            // Si no se encuentra el punto, devuelve -1
-            return -1;
         }
     }
 
