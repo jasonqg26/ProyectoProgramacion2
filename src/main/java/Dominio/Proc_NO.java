@@ -8,18 +8,16 @@ public class Proc_NO implements Runnable {
     private Semaphore sem_Interseccion;
     private Semaphore sem_Control; // Controla acceso a cantidad de carros en espera
 
-    private int carrosEO;
-    private int carrosNO;
-    private static int carrosEsperando = 0;
+    private static int carrosNO;
 
     private ImageView carroNOimagen;
     private Ruta rutaNO;
 
-    public Proc_NO(Semaphore sem_EO, Semaphore sem_NO, Semaphore sem_Interseccion, int carrosEO, int carrosNO, ImageView carroNOimagen, Ruta rutaNO) {
+    public Proc_NO(Semaphore sem_EO, Semaphore sem_NO, Semaphore sem_Interseccion, int carrosNO, ImageView carroNOimagen, Ruta rutaNO) {
         this.sem_EO = sem_EO;
         this.sem_NO = sem_NO;
         this.sem_Interseccion = sem_Interseccion;
-        this.carrosEO = carrosEO;
+
         this.carrosNO = carrosNO;
         this.carroNOimagen = carroNOimagen;
         this.rutaNO = rutaNO;
@@ -29,7 +27,7 @@ public class Proc_NO implements Runnable {
     @Override
     public void run() {
         try {
-            carrosNO++;
+
             Ruta.NodoPunto actual = rutaNO.getCabeza(); // Obtener el primer punto de la ruta
             carroNOimagen.setRotate(0);// se resetea la orientación de la imagen
 
@@ -43,8 +41,8 @@ public class Proc_NO implements Runnable {
 //------------------------------------------------------------------------------------------------------------------------//
             sem_NO.acquire();
             sem_Control.acquire(); // Controla el acceso a la variable carrosEsperando
-            carrosEsperando++;
-            if (carrosEsperando == 1) {
+            carrosNO++;
+            if (carrosNO == 1) {
                 sem_Interseccion.acquire();
             }
             sem_Control.release();
@@ -63,8 +61,8 @@ public class Proc_NO implements Runnable {
 
             sem_NO.acquire();
             sem_Control.acquire(); // Controla el acceso a la variable carrosEsperando
-            carrosEsperando--;
-            if (carrosEsperando == 0) {
+            carrosNO--;
+            if (carrosNO == 0) {
                 sem_Interseccion.release();
             }
             sem_Control.release();
