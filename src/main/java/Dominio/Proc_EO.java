@@ -36,9 +36,9 @@ public class Proc_EO implements Runnable {
         try {
             carrosEO++;
             Ruta.NodoPunto actual = rutaEO.getCabeza(); // Obtener el primer punto de la ruta
-            int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
  //------------------------Movimiento de carro desde el inicio de la ruta hasta llegar a la interseccion-------------------//
             while (actual.getCordenada().getX() != -600 && actual.getCordenada().getY() != 1) {
+                int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
                 sem_EO.acquire();
                 semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
@@ -64,6 +64,7 @@ public class Proc_EO implements Runnable {
 
 //-----------------------------------------Movimiento de carro por  la interseccion--------------------------------------//
             while (actual != null) {
+                int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
                 semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
@@ -83,6 +84,7 @@ public class Proc_EO implements Runnable {
 
 //----------------------------Movimiento de carro desde salida de la interseccion hasta fin de ruta----------------------//
             while (actual != null) {
+                int posicionActual = rutaEO.obtenerPosicion(actual.getCordenada());
                 semaforosPuntosRutaEO[posicionActual].acquire();
                 Ruta.NodoPunto finalActual = actual;
                 Platform.runLater(() -> moverCarro(finalActual.getCordenada().getX(), finalActual.getCordenada().getY()));
