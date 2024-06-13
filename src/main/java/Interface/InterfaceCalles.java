@@ -86,7 +86,7 @@ public class InterfaceCalles {
                 rutaCarroEO.insertar(new Ruta.Punto(-1900, -101));
 
                 // se ejecuta el proceso
-                new Thread(new Proc_EO(sem_EO, sem_NO, sem_Interseccion, carrosEO, EOImageView, rutaCarroEO)).start();
+                new Thread(new Proc_EO(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, EOImageView, rutaCarroEO)).start();
             }
         });
 //--------------------------------------------Carro EN-------------------------------------------------------------------------//
@@ -158,7 +158,7 @@ public class InterfaceCalles {
                 rutaCarroNO.insertar(new Ruta.Punto(-700, 600));
                 rutaCarroNO.insertar(new Ruta.Punto(-800, 600));
 
-                new Thread(new Proc_NO(sem_EO, sem_NO, sem_Interseccion,carrosNO, NOImageView, rutaCarroNO)).start();
+                new Thread(new Proc_NO(sem_EO, sem_NO, sem_Interseccion, carrosEO, carrosNO, NOImageView, rutaCarroNO)).start();
 
 
             }
